@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="l3enShop Template" />
+    <meta name="keywords" content="l3enShop, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ThapanatShop | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+        rel="stylesheet" />
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ asset('pro/css/bootstrap.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('pro/css/font-awesome.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('pro/css/elegant-icons.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('pro/css/nice-select.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('pro/css/jquery-ui.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('pro/css/owl.carousel.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('pro/css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('{{ asset('pro/pro/css/main.css" type="text/css" />
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__widget">
+            <div class="header__top__right__auth">
+                <a href="#"><i class="fa fa-user"></i> Login</a>
+            </div>
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li class="active"><a href="./index.html">Home</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> ThapanatShop@gmail.com</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Humberger End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                            <ul>
+                                <li><i class="fa fa-envelope"></i> ThapanatShop@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="header__logo">
+                        <h2>ThapanatShop</h2>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <nav class="header__menu" style="text-align: right">
+                        <ul>
+                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li class="active">
+                                <a href="./luckydraw.html">Lucky Draw</a>
+                            </li>
+                            <li class="active">
+                                <a href="#" id="cart-btn">
+                                    <i class="fa fa-shopping-cart"></i>Cart
+                                    <span id="cart-count" class="badge badge-primary">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <button type="submit" class="site-btn">Login</button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Cart Modal Section -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: aqua;">
+                    <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="background-color: rgba(0, 255, 255, 0.401);">
+                    <div id="cartItemsContainer">
+                        <!-- Cart items will be inserted here dynamically -->
+                    </div>
+                    <p id="totalPrice"></p>
+                    <p id="totalItems"></p>
+                </div>
+                <div class="modal-footer" style="background-color: aqua;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="clearCart()">
+                        Clear Cart
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="checkout()">
+                        Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="hero__item set-bg" data-setbg="./img/hero/banner.jpg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Featured Section Begin -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Featured Product</h2>
+                    </div>
+                    <div class="featured__controls">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".oranges">Oranges</li>
+                            <li data-filter=".fresh-meat">Fresh Meat</li>
+                            <li data-filter=".vegetables">Vegetables</li>
+                            <li data-filter=".fastfood">Fastfood</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row featured__filter" id="product-container">
+                <!-- Products will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("./products.json")
+                .then((response) => response.json())
+                .then((products) => {
+                    const container = document.getElementById("product-container");
+                    products.forEach((product) => {
+                        const categories = product.category.join(" ");
+                        const productHTML = `
+                  <div class="col-lg-3 col-md-4 col-sm-6 mix ${categories}">
+                    <div class="featured__item">
+                      <div class="featured__item__pic set-bg" style="background-image: url('${product.image}');">
+                        <ul class="featured__item__pic__hover">
+                          <li><a href="#" onclick="addToCart('${product.id}')"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                      </div>
+                      <div class="featured__item__text">
+                        <h6><a href="#">${product.name}</a></h6>
+                        <h6>${product.description}</h6>
+                        <h5>Price: ${product.price} ฿</h5>
+                      </div>
+                    </div>
+                  </div>
+                `;
+                        container.innerHTML += productHTML;
+                    });
+                })
+                .catch((error) =>
+                    console.error("Error loading the products:", error)
+                );
+        });
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        updateCart();
+
+        function updateCart() {
+            const cartCount = document.getElementById("cart-count");
+            cartCount.innerText = cart.length;
+        }
+
+        function addToCart(productId) {
+            if (cart.length >= 5) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Cart Full",
+                    text: "You can only add up to 5 items in the cart!",
+                    showConfirmButton: true,
+                });
+                return;
+            }
+
+            fetch("./products.json")
+                .then((response) => response.json())
+                .then((products) => {
+                    const product = products.find((p) => p.id === productId);
+                    if (product) {
+                        cart.push(product);
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        updateCart();
+                        Swal.fire({
+                            icon: "success",
+                            title: "Added to Cart",
+                            text: `${product.name} has been added to your cart.`,
+                            showConfirmButton: true, // Changed to true
+                            timer: 1500,
+                        });
+                    }
+                })
+                .catch((error) =>
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Error adding product to cart.",
+                    })
+                );
+        }
+
+        function showCartModal() {
+            if (cart.length === 0) {
+                Swal.fire({
+                    icon: "info",
+                    title: "Your cart is empty",
+                    showConfirmButton: true,
+                });
+                return;
+            }
+
+            let totalPrice = 0; // Declare totalPrice here
+            let cartItemsHTML = cart
+                .map((product, index) => {
+                    totalPrice += product.price; // Calculate total price
+                    return `
+            <div class="cart-item row mb-3">
+              <div class="col-md-3">
+                <img src="${product.image}" class="img-fluid" alt="${product.name}">
+              </div>
+              <div class="col-md-9">
+                <h5>${product.name}</h5>
+                <p><strong>Price:</strong> ${product.price} ฿</p>
+                <p><strong>Description:</strong> ${product.description}</p>
+                <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
+              </div>
+            </div>
+            <hr>
+            `;
+                })
+                .join("");
+
+            // Inject the cart items HTML and total price into the modal
+            document.getElementById("cartItemsContainer").innerHTML = cartItemsHTML;
+            document.getElementById("totalPrice").innerText = `Total Price: ${totalPrice.toFixed(2)} ฿`;
+            document.getElementById("totalItems").innerText = `Total Items: ${cart.length}`;
+
+            // Show the custom modal
+            $("#cartModal").modal("show");
+        }
+
+        // Update cart on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCart();
+            document
+                .getElementById("cart-btn")
+                .addEventListener("click", showCartModal);
+        });
+
+        // Remove product from cart
+        function removeFromCart(index) {
+            const removedProduct = cart[index];
+            cart.splice(index, 1); // Remove product from cart
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCart();
+            Swal.fire({
+                icon: "success",
+                title: "Removed from Cart",
+                text: `${removedProduct.name} has been removed from your cart.`,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            showCartModal(); // Re-show cart modal with updated cart
+        }
+
+        // Clear all items from cart
+        function clearCart() {
+            cart = [];
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCart();
+            Swal.fire({
+                icon: "success",
+                title: "Cleared Cart",
+                text: "All items have been removed from your cart.",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            $("#cartModal").modal("hide");
+
+        }
+
+    </script>
+
+
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- sweetalert -->
+
+    <!-- Featured Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <h1>ThapanatShop</h1>
+                        </div>
+                        <ul>
+                            <li>Address: 1234 Thailand</li>
+                            <li>Phone: +65 555 5555</li>
+                            <li>Email: ThapanatShop@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{{ asset('pro/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('pro/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('pro/js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{ asset('pro/js/jquery-ui.min.js')}}"></script>
+    <script src="{{ asset('pro/js/jquery.slicknav.js"></script>
+    <script src="{{ asset('pro/js/mixitup.min.js')}}"></script>
+    <script src="{{ asset('pro/js/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('pro/js/main.js')}}"></script>
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="ThapanatShop Template">
+    <meta name="keywords" content="ThapanatShop, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ThapanatShop | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ asset('pro/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('pro/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('pro/css/elegant-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('pro/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('pro/css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('pro/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('pro/css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('pro/css/main.css') }}">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="header__logo">
+                        <h2>ThapanatShop</h2>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6 text-right">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active">
+                                <a href="#cart" id="cart-btn">
+                                    <i class="fa fa-shopping-cart"></i> Cart
+                                    <span id="cart-count" class="badge badge-primary">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- ส่วนตะกร้าสินค้า (Cart) -->
+                <div id="cart" style="display: none;">
+                    <h1>ตะกร้าสินค้าของคุณ</h1>
+                    @if ($orders->isEmpty())
+                        <p>ตะกร้าของคุณยังว่างอยู่</p>
+                    @else
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>สินค้า</th>
+                                    <th>จำนวน</th>
+                                    <th>ราคา</th>
+                                    <th>รวม</th>
+                                    <th>ลบ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($orders as $order)
+                                    <tr>
+                                        <td>{{ $order->product->name }}</td>
+                                        <td>{{ $order->quantity }}</td>
+                                        <td>{{ $order->price }}</td>
+                                        <td>{{ $order->price * $order->quantity }}</td>
+                                        <td>
+                                            <form action="{{ route('order.remove', $order->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit">ลบ</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <p>ยอดรวมทั้งหมด: {{ $orders->sum(fn($order) => $order->price * $order->quantity) }} บาท</p>
+
+                        <!-- ปุ่มยืนยันการสั่งซื้อ -->
+                        <form action="{{ route('order.confirm') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">ยืนยันการสั่งซื้อ</button>
+                        </form>
+                        @if (session('message'))
+                            <p class="alert alert-success">{{ session('message') }}</p>
+                        @endif
+                    @endif
+                </div>
+                <script>
+                    document.getElementById('cart-btn').addEventListener('click', function(event) {
+                        event.preventDefault();
+                        document.getElementById('cart').style.display =
+                            document.getElementById('cart').style.display === 'none' ? 'block' : 'none';
+                    });
+                </script>
+
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Main Section -->
+    <main>
+        <div class="container">
+            <!-- Category Sections -->
+            @foreach ($categories as $key => $data)
+                <div class="category-section">
+                    <h2>{{ $data->name }}</h2>
+                    <div class="row">
+                        @if ($data->product->isNotEmpty())
+                            @foreach ($data->product as $product)
+                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                    <div class="featured__item">
+                                        <div class="featured__item__pic">
+                                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}"
+                                                class="img-fluid">
+                                        </div>
+                                        <div class="featured__item__text">
+                                            <h6><a href="#">{{ $product->name }}</a></h6>
+                                            <p>{{ $product->detail }}</p>
+                                            <h5>ราคา {{ $product->price }} บาท</h5>
+                                        </div>
+                                        <form action="{{ route('orders.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="number" name="quantity" value="1" min="1">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                            <!-- ตัวอย่างการเพิ่มข้อมูล user -->
+                                            <button type="submit">เพิ่มสินค้าลงตะกร้า</button>
+                                        </form>
+                                        @if (session('success'))
+                                            <p class="alert alert-success">{{ session('success') }}</p>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+    </main>
+    <!-- Main Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{{ asset('pro/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('pro/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('pro/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('pro/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('pro/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('pro/js/mixitup.min.js') }}"></script>
+    <script src="{{ asset('pro/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('pro/js/main.js') }}"></script>
+</body>
+
+</html>

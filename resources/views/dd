@@ -1,0 +1,31 @@
+ @foreach ($category as $key => $data)
+                        <div class="tab-pane fade {{ $key == 0 ? 'active show' : null }}"
+                            id="coffee{{ $data->id }}">
+
+                            <div class="text-center tab-header">
+                                <h3>
+                                    {{ $data->name }}
+                                </h3>
+                            </div>
+
+                            <div class="row gy-5">
+
+                                @foreach ($data->product as $product)
+                                    <div class="product-item">
+                                        <img src="{{ asset($product->image) }}" class="thumbnail" alt=""
+                                            onclick="openModal('{{ asset($product->image) }}')">
+                                        <h4>
+                                            {{ $product->name }}
+                                        </h4>
+                                        <p class="ingredients">
+                                            {{ $product->detail }}
+                                        </p>
+                                        <p class="price">
+                                            ราคา {{ $product->price }} บาท
+                                        </p>
+                                    </div><!-- Menu Item -->
+                                @endforeach
+
+                            </div>
+                        </div><!-- End Starter Menu Content -->
+                    @endforeach
